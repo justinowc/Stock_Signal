@@ -1,0 +1,38 @@
+# Watchlist for the 5-minute signal scanner.
+# One ticker per line. Lines starting with # are ignored.
+# Keep this list to ~30-80 liquid tickers for a free GitHub Actions runner
+# to comfortably finish a full scan within the 5-minute cycle.
+
+# Your original interest
+AXTI
+
+# Mega-cap tech / AI
+NVDA
+AMD
+MSFT
+GOOGL
+AMZN
+META
+TSLA
+AAPL
+
+# Semiconductors (sector AXTI sits in)
+TSM
+AVGO
+ASML
+MU
+ON
+ACMR
+COHR
+LITE
+
+# High-volatility / news-active mid-caps (commonly day-traded)
+PLTR
+SMCI
+SOUN
+IONQ
+RGTI
+
+# Broad market reference (useful as a trend filter, optional)
+SPY
+QQQ

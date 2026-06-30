@@ -1,0 +1,41 @@
+name: 5-minute stock signal scan
+
+on:
+  schedule:
+    # Every 5 minutes, Mon-Fri, 12:00-22:00 UTC — a wide buffer around US
+    # market hours (9:30am-4:00pm ET) covering both daylight saving cases.
+    # Outside actual market hours the scan just finds no new candle and exits.
+    - cron: "*/5 12-22 * * 1-5"
+  workflow_dispatch: {}   # lets you trigger a run manually from the Actions tab
+
+permissions:
+  contents: write   # needed so the workflow can commit the updated state.json
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4   # keep well under the 5-minute cycle
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run scanner
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python scanner.py
+
+      - name: Commit updated state
+        run: |
+          git config user.name "signal-bot"
+          git config user.email "signal-bot@users.noreply.github.com"
+          git add data/state.json
+          git diff --quiet --cached || git commit -m "Update scan state [skip ci]"
+          git push
