@@ -6,7 +6,7 @@
 # Your original interest
 AXTI
 
-# Mega-cap tech / AI
+# ── Mega-cap tech / AI ───────────────────────────────────────────────────
 NVDA
 AMD
 MSFT
@@ -15,8 +15,9 @@ AMZN
 META
 TSLA
 AAPL
+ORCL
 
-# Semiconductors (sector AXTI sits in)
+# ── Semiconductors & Networking ──────────────────────────────────────────
 TSM
 AVGO
 ASML
@@ -25,13 +26,30 @@ ON
 ACMR
 COHR
 LITE
+SIMO
+MRVL
+CRDO
+CIEN
+PENG
 
-# High-volatility / news-active mid-caps (commonly day-traded)
-PLTR
-SMCI
-SOUN
+# ── Quantum Computing ────────────────────────────────────────────────────
 IONQ
 RGTI
+QUBT
+QBTS
+
+# ── AI Infrastructure / Data Centres ────────────────────────────────────
+SMCI
+APLD
+CRWV
+PLTR
+
+# ── High-volatility / news-active mid-caps ───────────────────────────────
+SOUN
+CBRS
+
+# ── Space & Emerging Themes ──────────────────────────────────────────────
+SPCX
 
 # Broad market reference (useful as a trend filter, optional)
 SPY
