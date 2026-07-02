@@ -134,7 +134,23 @@ def compute_indicators(df: pd.DataFrame) -> dict:
     ind["bb_upper"] = (bb_mid + 2 * bb_std).iloc[-1]
     ind["bb_lower"] = (bb_mid - 2 * bb_std).iloc[-1]
 
+    # ATR(14) — core building block for price targets and stop placement
+    prev_close = close.shift(1)
+    tr = pd.concat([
+        high - low,
+        (high - prev_close).abs(),
+        (low - prev_close).abs(),
+    ], axis=1).max(axis=1)
+    ind["atr14"] = tr.rolling(14).mean().iloc[-1]
+
+    # Recent swing high/low over last 20 candles — key S/R reference
+    ind["swing_high"] = high.rolling(20).max().iloc[-1]
+    ind["swing_low"] = low.rolling(20).min().iloc[-1]
+
     ind["close"] = close.iloc[-1]
+    ind["open"] = df["Open"].iloc[-1]
+    ind["high"] = high.iloc[-1]
+    ind["low"] = low.iloc[-1]
     ind["candle_time"] = df.index[-1]
 
     return ind
@@ -207,23 +223,176 @@ def score_signal(ind: dict) -> tuple:
         return score, "HOLD", bullish + bearish
 
 
-def build_reason(decision: str, fired: list, ind: dict) -> str:
+def compute_targets(decision: str, ind: dict) -> dict:
     """
-    Deterministic, template-based reasoning ("analyst brain", free version).
-    Reads like a short technical-analyst note: states the call, then lists
-    the specific conditions that drove it.
+    Derives entry, stop loss, and tiered sell targets the way an experienced
+    intraday quant would frame them — all anchored to ATR(14) so levels scale
+    naturally with each stock's own recent volatility.
+
+    BUY setup:
+      Entry     : current close (or next candle open — signal fires on close)
+      Stop loss : entry − 1.0× ATR  (one ATR of heat is a clean hard stop)
+      Target T1 : entry + 1.5× ATR  (first take-profit, lock in ~60% of position)
+      Target T2 : entry + 2.5× ATR  (runner target, trail stop after T1 hit)
+      T2 is also capped at swing_high if that's closer — don't fight resistance.
+
+    SELL/SHORT setup (mirror logic):
+      Entry     : current close
+      Stop loss : entry + 1.0× ATR
+      Target T1 : entry − 1.5× ATR
+      Target T2 : entry − 2.5× ATR
+      T2 is also floored at swing_low.
+
+    Risk/reward is reported vs T2 (the full move), giving a conservative
+    picture of the trade's potential.
     """
+    entry = ind["close"]
+    atr = ind["atr14"]
+
     if decision == "BUY":
-        lead = "Multiple short-term indicators are aligned bullish:"
-    else:
-        lead = "Multiple short-term indicators are aligned bearish:"
-    bullet_lines = "\n".join(f"- {r}" for r in fired)
-    bb_note = ""
-    if ind["close"] >= ind["bb_upper"]:
-        bb_note = "\nNote: price is at/above the upper Bollinger Band — already stretched, consider this may be a late entry."
-    elif ind["close"] <= ind["bb_lower"]:
-        bb_note = "\nNote: price is at/below the lower Bollinger Band — a bounce play, not a confirmed reversal."
-    return f"{lead}\n{bullet_lines}{bb_note}"
+        stop = entry - (1.0 * atr)
+        t1 = entry + (1.5 * atr)
+        t2 = min(entry + (2.5 * atr), ind["swing_high"])
+        # Don't let rounding push T2 below T1
+        t2 = max(t2, t1 + 0.01)
+    else:  # SELL
+        stop = entry + (1.0 * atr)
+        t1 = entry - (1.5 * atr)
+        t2 = max(entry - (2.5 * atr), ind["swing_low"])
+        t2 = min(t2, t1 - 0.01)
+
+    risk = abs(entry - stop)
+    reward = abs(t2 - entry)
+    rr = reward / risk if risk > 0 else 0
+
+    return {
+        "entry": entry,
+        "stop": stop,
+        "t1": t1,
+        "t2": t2,
+        "risk": risk,
+        "reward": reward,
+        "rr": rr,
+        "atr": atr,
+    }
+
+
+def build_reason(decision: str, fired: list, ind: dict, targets: dict) -> str:
+    """
+    Quant trader voice — references actual indicator readings and price levels,
+    not generic descriptions. Written as a concise trade rationale you'd say
+    out loud to a desk partner, not a textbook definition.
+    """
+    rsi = ind["rsi14"]
+    vwap = ind["vwap"]
+    ema9 = ind["ema9"]
+    ema21 = ind["ema21"]
+    close = ind["close"]
+    vol_ratio = ind["volume"] / ind["volume_avg20"] if ind["volume_avg20"] else 1
+    atr = targets["atr"]
+
+    lines = []
+
+    if decision == "BUY":
+        # Trend context
+        if ema9 > ema21:
+            lines.append(
+                f"Trend: EMA9 ${ema9:.2f} > EMA21 ${ema21:.2f} — "
+                f"momentum structure is bullish on the 5m. Price holding above "
+                f"both MAs is textbook intraday long setup."
+            )
+        # VWAP context
+        if close > vwap:
+            lines.append(
+                f"VWAP: Trading ${close - vwap:.2f} above VWAP (${vwap:.2f}). "
+                f"Institutions anchor execution to VWAP — price above it means "
+                f"the smart money flow is net long this session."
+            )
+        else:
+            lines.append(
+                f"VWAP: Reclaimed VWAP (${vwap:.2f}) from below — "
+                f"watch for a hold above as confirmation."
+            )
+        # RSI
+        if rsi <= 30:
+            lines.append(
+                f"RSI14 {rsi:.0f}: Deep oversold. At these levels mean-reversion "
+                f"probability is high — this is where I size in, not chase."
+            )
+        else:
+            lines.append(
+                f"RSI14 {rsi:.0f}: Momentum is constructive without being "
+                f"stretched. Room to run before the 70 overbought wall."
+            )
+        # MACD
+        if ind["macd_hist"] > ind["macd_hist_prev"]:
+            lines.append(
+                f"MACD: Histogram expanding bullish (hist {ind['macd_hist']:.4f}). "
+                f"Crossover momentum is accelerating — that's the fuel."
+            )
+        # Volume
+        if vol_ratio > 1.2:
+            lines.append(
+                f"Volume: {vol_ratio:.1f}× the 20-period avg. "
+                f"Elevated participation backs the move — this isn't air."
+            )
+        # BB context
+        if close >= ind["bb_upper"]:
+            lines.append(
+                f"⚠️ Caution: Price is printing at/above upper Bollinger Band "
+                f"(${ind['bb_upper']:.2f}). Statistically extended — consider "
+                f"waiting for a pullback to VWAP/EMA21 for a cleaner entry."
+            )
+        # ATR note
+        lines.append(
+            f"ATR(14) is ${atr:.2f} — that's the stock's natural 'breathing room' "
+            f"per candle. Targets and stop are sized off this so levels fit the "
+            f"stock's own rhythm, not arbitrary round numbers."
+        )
+
+    else:  # SELL
+        if ema9 < ema21:
+            lines.append(
+                f"Trend: EMA9 ${ema9:.2f} < EMA21 ${ema21:.2f} — "
+                f"short-term structure has flipped. Sellers are in control on the 5m."
+            )
+        if close < vwap:
+            lines.append(
+                f"VWAP: Trading ${vwap - close:.2f} below VWAP (${vwap:.2f}). "
+                f"Failed VWAP = institutional distribution. This is a bearish anchor."
+            )
+        if rsi >= 70:
+            lines.append(
+                f"RSI14 {rsi:.0f}: Overbought and rolling over. "
+                f"This is where I start looking for the exit, not adding."
+            )
+        else:
+            lines.append(
+                f"RSI14 {rsi:.0f}: Momentum deteriorating. "
+                f"No support from the momentum read."
+            )
+        if ind["macd_hist"] < ind["macd_hist_prev"]:
+            lines.append(
+                f"MACD: Histogram contracting/negative (hist {ind['macd_hist']:.4f}). "
+                f"Bearish momentum is building, not fading."
+            )
+        if vol_ratio > 1.2:
+            lines.append(
+                f"Volume: {vol_ratio:.1f}× average. "
+                f"Distribution on elevated volume is a clear institutional fingerprint."
+            )
+        if close <= ind["bb_lower"]:
+            lines.append(
+                f"⚠️ Note: Price is at/below lower Bollinger Band "
+                f"(${ind['bb_lower']:.2f}). Could see a technical bounce — "
+                f"tighten stop to protect short if bounce materialises."
+            )
+        lines.append(
+            f"ATR(14) ${atr:.2f} used to size levels — "
+            f"stop and targets reflect this ticker's actual volatility."
+        )
+
+    return "\n\n".join(lines)
 
 
 # ── Telegram ──────────────────────────────────────────────────────────────
@@ -243,15 +412,43 @@ def send_telegram_message(text: str):
     resp.raise_for_status()
 
 
-def format_alert(ticker: str, decision: str, ind: dict, reason: str) -> str:
-    emoji = "🟢" if decision == "BUY" else "🔴"
+def format_alert(ticker: str, decision: str, ind: dict, reason: str, targets: dict) -> str:
+    if decision == "BUY":
+        header_emoji = "🟢"
+        decision_line = "✅ *BUY*"
+        price_label = "📥 Entry Price"
+        sell_label = "📤 Take Profit"
+        sell_value = f"T1: ${targets['t1']:.2f}  |  T2: ${targets['t2']:.2f}"
+        stop_label = "🛑 Stop Loss"
+    else:
+        header_emoji = "🔴"
+        decision_line = "🚨 *SELL / EXIT*"
+        price_label = "📥 Entry / Exit Price"
+        sell_label = "🎯 Cover Target"
+        sell_value = f"T1: ${targets['t1']:.2f}  |  T2: ${targets['t2']:.2f}"
+        stop_label = "🛑 Stop Loss"
+
+    rr_bar = "█" * min(int(targets['rr'] * 2), 10)  # visual R:R bar, capped at 5:1
+
+    candle_ts = str(ind["candle_time"])
+
     return (
-        f"{emoji} *{ticker}*\n"
-        f"Decision: *{decision}*\n"
-        f"Price: ${ind['close']:.2f}\n"
-        f"Candle: {ind['candle_time']} (5m)\n\n"
-        f"Reason:\n{reason}\n\n"
-        f"_Rule-based technical signal — not investment advice. Verify before acting._"
+        f"{header_emoji} *{ticker}*  —  {decision_line}\n"
+        f"{'─' * 28}\n"
+        f"{price_label}: *${targets['entry']:.2f}*\n"
+        f"{sell_label}: *{sell_value}*\n"
+        f"{stop_label}: *${targets['stop']:.2f}*\n"
+        f"{'─' * 28}\n"
+        f"⚖️ Risk / Reward:  1 : {targets['rr']:.1f}  {rr_bar}\n"
+        f"📉 Max Risk: ${targets['risk']:.2f} per share\n"
+        f"📈 Max Gain (T2): ${targets['reward']:.2f} per share\n"
+        f"{'─' * 28}\n"
+        f"🧠 *Analyst Note*\n"
+        f"{reason}\n"
+        f"{'─' * 28}\n"
+        f"⏱ Signal candle: {candle_ts} (5m)\n"
+        f"_Confluence score confirmed across EMA, VWAP, RSI, MACD, Volume_\n"
+        f"_Rule-based signal — verify before acting. Not financial advice._"
     )
 
 
@@ -277,10 +474,11 @@ def run_scan():
 
             prev_decision = prev.get("last_decision")
             if decision in ("BUY", "SELL") and decision != prev_decision:
-                reason = build_reason(decision, fired, ind)
-                msg = format_alert(ticker, decision, ind, reason)
+                targets = compute_targets(decision, ind)
+                reason = build_reason(decision, fired, ind, targets)
+                msg = format_alert(ticker, decision, ind, reason, targets)
                 send_telegram_message(msg)
-                log.info(f"Alert sent: {ticker} {decision} (score {score})")
+                log.info(f"Alert sent: {ticker} {decision} (score {score}, R:R {targets['rr']:.1f})")
 
             state[ticker] = {
                 "last_candle": candle_key,
