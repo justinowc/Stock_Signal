@@ -59,7 +59,6 @@ NAMES = {
     "AAPL":"Apple",           "ORCL":"Oracle",
     "TSM":"TSMC",             "AVGO":"Broadcom",
     "ASML":"ASML",            "MU":"Micron",
-    "ON":"ON Semi",           "ACMR":"ACM Research",
     "COHR":"Coherent",        "LITE":"Lumentum",
     "SIMO":"Silicon Motion",  "MRVL":"Marvell",
     "CRDO":"Credo Tech",      "CIEN":"Ciena",
@@ -68,8 +67,8 @@ NAMES = {
     "QBTS":"D-Wave",          "SMCI":"Super Micro",
     "APLD":"Applied Digital", "CRWV":"CoreWeave",
     "PLTR":"Palantir",        "SOUN":"SoundHound",
-    "CBRS":"CBRS",            "SPCX":"SPCX",
-    "SPY":"S&P 500 ETF",      "QQQ":"Nasdaq 100 ETF",
+    "CBRS":"Cerebras Systems","SPCX":"SPCX",
+    "NBIS":"Nebius Group",      "QQQ":"Nasdaq 100 ETF",
 }
 
 # ── Watchlist & state ─────────────────────────────────────────────────────
