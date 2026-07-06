@@ -1,9 +1,23 @@
-name: 5-minute stock signal scan
+name: Agentic Stock Signal Bot
 
 on:
   schedule:
-    - cron: "*/5 12-22 * * 1-5"
-  workflow_dispatch: {}
+    # Pre-market brief: 8:45am ET = 12:45pm UTC (Mon-Fri)
+    - cron: "45 12 * * 1-5"
+    # Market scan: every 15 min, 9:30am-4pm ET = 13:30-20:00 UTC
+    - cron: "30,45 13 * * 1-5"
+    - cron: "0,15,30,45 14-19 * * 1-5"
+    - cron: "0 20 * * 1-5"
+    # Post-market brief: 4:30pm ET = 20:30pm UTC
+    - cron: "30 20 * * 1-5"
+    # 24hr news check: every 3 hours overnight/weekend
+    - cron: "0 0,3,6,9,22 * * *"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Force mode (market_scan / premarket_brief / postmarket_brief / news_check)'
+        required: false
+        default: ''
 
 permissions:
   contents: write
@@ -11,7 +25,7 @@ permissions:
 jobs:
   scan:
     runs-on: ubuntu-latest
-    timeout-minutes: 4
+    timeout-minutes: 8
     steps:
       - uses: actions/checkout@v5
 
@@ -23,11 +37,17 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Run scanner
+      - name: Run bot
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: python scanner.py
+          TELEGRAM_CHAT_ID:   ${{ secrets.TELEGRAM_CHAT_ID }}
+          ANTHROPIC_API_KEY:  ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          if [ -n "${{ github.event.inputs.mode }}" ]; then
+            python scanner.py --mode ${{ github.event.inputs.mode }}
+          else
+            python scanner.py
+          fi
 
       - name: Commit updated state
         run: |
