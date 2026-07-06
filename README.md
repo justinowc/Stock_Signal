@@ -1,4 +1,4 @@
-# 5-minute multi-indicator stock signal bot (free deployment)
+# Upgrade to agentic bot (Free Deployment)
 
 Scans a watchlist every 5 minutes, scores each ticker against a confluence
 of the technical indicators professional/intraday traders commonly use, and
