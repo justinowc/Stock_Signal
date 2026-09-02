@@ -1,254 +1,254 @@
 {
   "AXTI": {
-    "last_candle": "2026-09-02 14:55:00-04:00",
-    "last_decision": "HOLD",
-    "last_score": 2,
-    "last_price": 56.5099983215332,
-    "updated_at": "2026-09-02T18:56:46.162640+00:00"
+    "last_candle": "2026-09-02 15:55:00-04:00",
+    "last_decision": "BUY",
+    "last_score": 3,
+    "last_price": 56.959999084472656,
+    "updated_at": "2026-09-02T21:32:21.980311+00:00"
   },
   "NVDA": {
-    "last_candle": "2026-09-02 14:55:00-04:00",
+    "last_candle": "2026-09-02 15:55:00-04:00",
     "last_decision": "SELL",
-    "last_score": -4,
-    "last_price": 224.3000946044922,
-    "updated_at": "2026-09-02T18:56:47.425307+00:00"
+    "last_score": -3,
+    "last_price": 224.39999389648438,
+    "updated_at": "2026-09-02T21:32:22.702673+00:00"
   },
   "AMD": {
-    "last_candle": "2026-09-02 14:55:00-04:00",
-    "last_decision": "HOLD",
-    "last_score": -2,
-    "last_price": 456.3900146484375,
-    "updated_at": "2026-09-02T18:56:48.064756+00:00"
+    "last_candle": "2026-09-02 15:55:00-04:00",
+    "last_decision": "SELL",
+    "last_score": -4,
+    "last_price": 456.29998779296875,
+    "updated_at": "2026-09-02T21:32:24.095536+00:00"
   },
   "MSFT": {
-    "last_candle": "2026-09-02 14:55:00-04:00",
-    "last_decision": "SELL",
-    "last_score": -3,
-    "last_price": 495.1499938964844,
-    "updated_at": "2026-09-02T18:56:49.063129+00:00"
+    "last_candle": "2026-09-02 15:55:00-04:00",
+    "last_decision": "BUY",
+    "last_score": 4,
+    "last_price": 496.80999755859375,
+    "updated_at": "2026-09-02T21:32:25.414779+00:00"
   },
   "GOOGL": {
-    "last_candle": "2026-09-02 14:55:00-04:00",
-    "last_decision": "HOLD",
-    "last_score": -1,
-    "last_price": 337.3800048828125,
-    "updated_at": "2026-09-02T18:56:49.704124+00:00"
+    "last_candle": "2026-09-02 15:55:00-04:00",
+    "last_decision": "SELL",
+    "last_score": -5,
+    "last_price": 337.1300048828125,
+    "updated_at": "2026-09-02T21:32:26.820753+00:00"
   },
   "AMZN": {
-    "last_candle": "2026-09-02 14:55:00-04:00",
-    "last_decision": "BUY",
-    "last_score": 4,
-    "last_price": 255.2353057861328,
-    "updated_at": "2026-09-02T18:56:50.899985+00:00"
-  },
-  "META": {
-    "last_candle": "2026-09-02 14:55:00-04:00",
+    "last_candle": "2026-09-02 15:55:00-04:00",
     "last_decision": "SELL",
     "last_score": -3,
-    "last_price": 591.5,
-    "updated_at": "2026-09-02T18:56:52.036415+00:00"
+    "last_price": 254.97000122070312,
+    "updated_at": "2026-09-02T21:32:28.152099+00:00"
+  },
+  "META": {
+    "last_candle": "2026-09-02 15:55:00-04:00",
+    "last_decision": "SELL",
+    "last_score": -3,
+    "last_price": 592.9000244140625,
+    "updated_at": "2026-09-02T21:32:29.212633+00:00"
   },
   "TSLA": {
-    "last_candle": "2026-09-02 14:55:00-04:00",
-    "last_decision": "HOLD",
-    "last_score": -2,
-    "last_price": 352.32000732421875,
-    "updated_at": "2026-09-02T18:56:52.680196+00:00"
+    "last_candle": "2026-09-02 15:55:00-04:00",
+    "last_decision": "BUY",
+    "last_score": 3,
+    "last_price": 356.989990234375,
+    "updated_at": "2026-09-02T21:32:30.651953+00:00"
   },
   "AAPL": {
-    "last_candle": "2026-09-02 14:55:00-04:00",
+    "last_candle": "2026-09-02 15:55:00-04:00",
     "last_decision": "SELL",
-    "last_score": -4,
-    "last_price": 325.1400146484375,
-    "updated_at": "2026-09-02T18:56:53.940831+00:00"
+    "last_score": -5,
+    "last_price": 324.989990234375,
+    "updated_at": "2026-09-02T21:32:31.636911+00:00"
   },
   "TSM": {
-    "last_candle": "2026-09-02 14:55:00-04:00",
-    "last_decision": "HOLD",
-    "last_score": 1,
-    "last_price": 414.17999267578125,
-    "updated_at": "2026-09-02T18:56:55.247807+00:00"
-  },
-  "AVGO": {
-    "last_candle": "2026-09-02 14:55:00-04:00",
-    "last_decision": "BUY",
-    "last_score": 4,
-    "last_price": 369.135009765625,
-    "updated_at": "2026-09-02T18:56:55.907054+00:00"
-  },
-  "ASML": {
-    "last_candle": "2026-09-02 14:55:00-04:00",
-    "last_decision": "HOLD",
-    "last_score": 2,
-    "last_price": 1682.1650390625,
-    "updated_at": "2026-09-02T18:56:56.598405+00:00"
-  },
-  "MU": {
-    "last_candle": "2026-09-02 14:55:00-04:00",
-    "last_decision": "BUY",
-    "last_score": 4,
-    "last_price": 954.0700073242188,
-    "updated_at": "2026-09-02T18:56:57.761967+00:00"
-  },
-  "ON": {
-    "last_candle": "2026-09-02 14:55:00-04:00",
-    "last_decision": "HOLD",
-    "last_score": 0,
-    "last_price": 72.41000366210938,
-    "updated_at": "2026-09-02T18:56:58.427264+00:00"
-  },
-  "ACMR": {
-    "last_candle": "2026-09-02 14:55:00-04:00",
-    "last_decision": "HOLD",
-    "last_score": -1,
-    "last_price": 69.11000061035156,
-    "updated_at": "2026-09-02T18:56:59.063043+00:00"
-  },
-  "COHR": {
-    "last_candle": "2026-09-02 14:55:00-04:00",
-    "last_decision": "HOLD",
-    "last_score": 1,
-    "last_price": 267.7250061035156,
-    "updated_at": "2026-09-02T18:56:59.786085+00:00"
-  },
-  "LITE": {
-    "last_candle": "2026-09-02 14:55:00-04:00",
+    "last_candle": "2026-09-02 15:55:00-04:00",
     "last_decision": "BUY",
     "last_score": 5,
-    "last_price": 864.0650024414062,
-    "updated_at": "2026-09-02T18:57:00.996856+00:00"
+    "last_price": 415.5400085449219,
+    "updated_at": "2026-09-02T21:32:34.098819+00:00"
   },
-  "PLTR": {
-    "last_candle": "2026-09-02 14:55:00-04:00",
+  "AVGO": {
+    "last_candle": "2026-09-02 15:55:00-04:00",
     "last_decision": "SELL",
     "last_score": -4,
-    "last_price": 168.53770446777344,
-    "updated_at": "2026-09-02T18:57:11.603344+00:00"
+    "last_price": 367.7699890136719,
+    "updated_at": "2026-09-02T21:32:35.464407+00:00"
+  },
+  "ASML": {
+    "last_candle": "2026-09-02 15:55:00-04:00",
+    "last_decision": "BUY",
+    "last_score": 3,
+    "last_price": 1682.6500244140625,
+    "updated_at": "2026-09-02T21:32:36.886171+00:00"
+  },
+  "MU": {
+    "last_candle": "2026-09-02 15:55:00-04:00",
+    "last_decision": "BUY",
+    "last_score": 4,
+    "last_price": 954.75,
+    "updated_at": "2026-09-02T21:32:37.684297+00:00"
+  },
+  "ON": {
+    "last_candle": "2026-09-02 15:55:00-04:00",
+    "last_decision": "SELL",
+    "last_score": -3,
+    "last_price": 72.33999633789062,
+    "updated_at": "2026-09-02T21:32:39.082251+00:00"
+  },
+  "ACMR": {
+    "last_candle": "2026-09-02 15:55:00-04:00",
+    "last_decision": "BUY",
+    "last_score": 5,
+    "last_price": 69.94000244140625,
+    "updated_at": "2026-09-02T21:32:40.632514+00:00"
+  },
+  "COHR": {
+    "last_candle": "2026-09-02 15:55:00-04:00",
+    "last_decision": "BUY",
+    "last_score": 4,
+    "last_price": 268.3800048828125,
+    "updated_at": "2026-09-02T21:32:42.037992+00:00"
+  },
+  "LITE": {
+    "last_candle": "2026-09-02 15:55:00-04:00",
+    "last_decision": "BUY",
+    "last_score": 3,
+    "last_price": 870.27001953125,
+    "updated_at": "2026-09-02T21:32:42.736190+00:00"
+  },
+  "PLTR": {
+    "last_candle": "2026-09-02 15:55:00-04:00",
+    "last_decision": "HOLD",
+    "last_score": 2,
+    "last_price": 169.4600067138672,
+    "updated_at": "2026-09-02T21:32:58.394962+00:00"
   },
   "SMCI": {
-    "last_candle": "2026-09-02 14:55:00-04:00",
-    "last_decision": "HOLD",
-    "last_score": 0,
-    "last_price": 36.5098991394043,
-    "updated_at": "2026-09-02T18:57:09.117563+00:00"
+    "last_candle": "2026-09-02 15:55:00-04:00",
+    "last_decision": "BUY",
+    "last_score": 4,
+    "last_price": 37.0,
+    "updated_at": "2026-09-02T21:32:54.581896+00:00"
   },
   "SOUN": {
-    "last_candle": "2026-09-02 14:55:00-04:00",
-    "last_decision": "BUY",
-    "last_score": 3,
-    "last_price": 6.864999771118164,
-    "updated_at": "2026-09-02T18:57:12.730782+00:00"
+    "last_candle": "2026-09-02 15:55:00-04:00",
+    "last_decision": "SELL",
+    "last_score": -3,
+    "last_price": 6.78000020980835,
+    "updated_at": "2026-09-02T21:32:59.728378+00:00"
   },
   "IONQ": {
-    "last_candle": "2026-09-02 14:55:00-04:00",
+    "last_candle": "2026-09-02 15:55:00-04:00",
     "last_decision": "BUY",
     "last_score": 3,
-    "last_price": 37.505001068115234,
-    "updated_at": "2026-09-02T18:57:05.451047+00:00"
+    "last_price": 37.65999984741211,
+    "updated_at": "2026-09-02T21:32:48.991061+00:00"
   },
   "RGTI": {
-    "last_candle": "2026-09-02 14:55:00-04:00",
-    "last_decision": "BUY",
-    "last_score": 3,
-    "last_price": 14.949999809265137,
-    "updated_at": "2026-09-02T18:57:06.588667+00:00"
+    "last_candle": "2026-09-02 15:55:00-04:00",
+    "last_decision": "SELL",
+    "last_score": -3,
+    "last_price": 14.869999885559082,
+    "updated_at": "2026-09-02T21:32:50.321564+00:00"
   },
   "SPY": {
-    "last_candle": "2026-09-02 14:55:00-04:00",
-    "last_decision": "HOLD",
-    "last_score": -2,
-    "last_price": 764.9805908203125,
-    "updated_at": "2026-09-02T18:57:14.702850+00:00"
-  },
-  "QQQ": {
-    "last_candle": "2026-09-02 14:55:00-04:00",
-    "last_decision": "HOLD",
-    "last_score": -1,
-    "last_price": 708.3800048828125,
-    "updated_at": "2026-09-02T18:57:15.365212+00:00"
-  },
-  "ORCL": {
-    "last_candle": "2026-09-02 14:55:00-04:00",
-    "last_decision": "HOLD",
-    "last_score": 2,
-    "last_price": 145.9600067138672,
-    "updated_at": "2026-09-02T18:56:54.597182+00:00"
-  },
-  "SIMO": {
-    "last_candle": "2026-09-02 14:55:00-04:00",
-    "last_decision": "HOLD",
-    "last_score": 1,
-    "last_price": 239.5500030517578,
-    "updated_at": "2026-09-02T18:57:01.658105+00:00"
-  },
-  "MRVL": {
-    "last_candle": "2026-09-02 14:55:00-04:00",
-    "last_decision": "HOLD",
-    "last_score": 2,
-    "last_price": 207.57000732421875,
-    "updated_at": "2026-09-02T18:57:02.317988+00:00"
-  },
-  "CRDO": {
-    "last_candle": "2026-09-02 14:55:00-04:00",
-    "last_decision": "HOLD",
-    "last_score": 0,
-    "last_price": 165.25,
-    "updated_at": "2026-09-02T18:57:02.968936+00:00"
-  },
-  "CIEN": {
-    "last_candle": "2026-09-02 14:55:00-04:00",
-    "last_decision": "HOLD",
-    "last_score": -2,
-    "last_price": 350.8299865722656,
-    "updated_at": "2026-09-02T18:57:03.623061+00:00"
-  },
-  "PENG": {
-    "last_candle": "2026-09-02 14:55:00-04:00",
-    "last_decision": "HOLD",
-    "last_score": 2,
-    "last_price": 47.415000915527344,
-    "updated_at": "2026-09-02T18:57:04.265761+00:00"
-  },
-  "QUBT": {
-    "last_candle": "2026-09-02 14:55:00-04:00",
+    "last_candle": "2026-09-02 15:55:00-04:00",
     "last_decision": "BUY",
     "last_score": 3,
-    "last_price": 7.925000190734863,
-    "updated_at": "2026-09-02T18:57:07.815001+00:00"
+    "last_price": 765.1500244140625,
+    "updated_at": "2026-09-02T21:33:03.227803+00:00"
+  },
+  "QQQ": {
+    "last_candle": "2026-09-02 15:55:00-04:00",
+    "last_decision": "BUY",
+    "last_score": 5,
+    "last_price": 709.25,
+    "updated_at": "2026-09-02T21:33:04.806484+00:00"
+  },
+  "ORCL": {
+    "last_candle": "2026-09-02 15:55:00-04:00",
+    "last_decision": "HOLD",
+    "last_score": 0,
+    "last_price": 145.77000427246094,
+    "updated_at": "2026-09-02T21:32:32.759614+00:00"
+  },
+  "SIMO": {
+    "last_candle": "2026-09-02 15:55:00-04:00",
+    "last_decision": "BUY",
+    "last_score": 3,
+    "last_price": 242.22000122070312,
+    "updated_at": "2026-09-02T21:32:44.067620+00:00"
+  },
+  "MRVL": {
+    "last_candle": "2026-09-02 15:55:00-04:00",
+    "last_decision": "HOLD",
+    "last_score": 0,
+    "last_price": 206.25,
+    "updated_at": "2026-09-02T21:32:44.836615+00:00"
+  },
+  "CRDO": {
+    "last_candle": "2026-09-02 15:55:00-04:00",
+    "last_decision": "BUY",
+    "last_score": 3,
+    "last_price": 165.42999267578125,
+    "updated_at": "2026-09-02T21:32:46.196400+00:00"
+  },
+  "CIEN": {
+    "last_candle": "2026-09-02 15:55:00-04:00",
+    "last_decision": "HOLD",
+    "last_score": 2,
+    "last_price": 354.54998779296875,
+    "updated_at": "2026-09-02T21:32:46.889025+00:00"
+  },
+  "PENG": {
+    "last_candle": "2026-09-02 15:55:00-04:00",
+    "last_decision": "BUY",
+    "last_score": 5,
+    "last_price": 47.61000061035156,
+    "updated_at": "2026-09-02T21:32:48.179368+00:00"
+  },
+  "QUBT": {
+    "last_candle": "2026-09-02 15:55:00-04:00",
+    "last_decision": "SELL",
+    "last_score": -5,
+    "last_price": 7.84499979019165,
+    "updated_at": "2026-09-02T21:32:51.732036+00:00"
   },
   "QBTS": {
-    "last_candle": "2026-09-02 14:55:00-04:00",
+    "last_candle": "2026-09-02 15:55:00-04:00",
     "last_decision": "HOLD",
-    "last_score": 1,
-    "last_price": 16.545000076293945,
-    "updated_at": "2026-09-02T18:57:08.491940+00:00"
+    "last_score": 0,
+    "last_price": 16.489999771118164,
+    "updated_at": "2026-09-02T21:32:53.050192+00:00"
   },
   "APLD": {
-    "last_candle": "2026-09-02 14:55:00-04:00",
-    "last_decision": "HOLD",
-    "last_score": 1,
-    "last_price": 24.774999618530273,
-    "updated_at": "2026-09-02T18:57:09.787025+00:00"
+    "last_candle": "2026-09-02 15:55:00-04:00",
+    "last_decision": "BUY",
+    "last_score": 3,
+    "last_price": 24.900100708007812,
+    "updated_at": "2026-09-02T21:32:56.903267+00:00"
   },
   "CRWV": {
-    "last_candle": "2026-09-02 14:55:00-04:00",
+    "last_candle": "2026-09-02 15:55:00-04:00",
     "last_decision": "HOLD",
-    "last_score": 1,
-    "last_price": 81.56999969482422,
-    "updated_at": "2026-09-02T18:57:10.433534+00:00"
+    "last_score": 0,
+    "last_price": 80.88999938964844,
+    "updated_at": "2026-09-02T21:32:57.610926+00:00"
   },
   "CBRS": {
-    "last_candle": "2026-09-02 14:55:00-04:00",
-    "last_decision": "HOLD",
-    "last_score": 1,
-    "last_price": 183.6199951171875,
-    "updated_at": "2026-09-02T18:57:13.368662+00:00"
+    "last_candle": "2026-09-02 15:55:00-04:00",
+    "last_decision": "BUY",
+    "last_score": 4,
+    "last_price": 184.52000427246094,
+    "updated_at": "2026-09-02T21:33:01.190041+00:00"
   },
   "SPCX": {
-    "last_candle": "2026-09-02 14:55:00-04:00",
+    "last_candle": "2026-09-02 15:55:00-04:00",
     "last_decision": "HOLD",
-    "last_score": 1,
-    "last_price": 140.67999267578125,
-    "updated_at": "2026-09-02T18:57:14.001597+00:00"
+    "last_score": 0,
+    "last_price": 140.72000122070312,
+    "updated_at": "2026-09-02T21:33:01.904552+00:00"
   }
 }
