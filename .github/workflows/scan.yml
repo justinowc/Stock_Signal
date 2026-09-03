@@ -1,7 +1,7 @@
 name: 5-minute stock signal scan
 
 on:
-  schedule:
+  #schedule:
     - cron: "*/5 12-22 * * 1-5"
   workflow_dispatch: {}
 
